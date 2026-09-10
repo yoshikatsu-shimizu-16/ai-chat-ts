@@ -14,9 +14,8 @@
 
 ## Improvement loop
 
-- Use the `code-improvement-loop` skill whenever the user corrects code or working behavior produced by the development AI, when a quality check exposes a reusable failure pattern, or when reviewing pending improvement rules.
+- Use the `loop-engineering` skill whenever the user mentions loop engineering, corrects code or working behavior produced by the development AI, when a quality check exposes a reusable failure pattern, or when reviewing pending improvement rules.
 - Record an anonymized summary, not the user's raw prompt. Never persist secrets, tokens, environment values, personal data, or full transcripts.
 - Treat ordinary feature requests and one-time preference changes as work requirements, not learning observations.
-- Apply `.improvement-loop/active-rules.md` during implementation. Do not manually edit that generated file.
-- Automatic rule changes may update only `.improvement-loop/`. They must not modify application source code on their own.
-
+- Apply `.agents/skills/loop-engineering/improvement-loop-state/active-rules.md` during implementation. Do not manually edit that generated file.
+- Automatic rule changes may update only `.agents/skills/loop-engineering/improvement-loop-state/`. They must not modify application source code on their own.

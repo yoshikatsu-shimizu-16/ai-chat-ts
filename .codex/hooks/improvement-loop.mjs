@@ -8,7 +8,7 @@ import {
   loadState,
   promoteEligibleRules,
   verifyTurn,
-} from "../../scripts/improvement-loop/core.mjs";
+} from "../../.agents/skills/loop-engineering/improvement-loop/core.mjs";
 
 async function readInput() {
   let text = "";
@@ -37,9 +37,9 @@ function changedSourceFiles(root) {
     .filter(
       (path) =>
         /\.(?:[cm]?[jt]sx?)$/.test(path) &&
-        !path.startsWith("scripts/improvement-loop/") &&
+        !path.startsWith(".agents/skills/loop-engineering/improvement-loop/") &&
         !path.startsWith(".codex/") &&
-        !path.startsWith(".agents/skills/code-improvement-loop/"),
+        !path.startsWith(".agents/skills/loop-engineering/"),
     );
 }
 
@@ -61,7 +61,7 @@ async function sessionStart(root) {
   await initializeStore(root);
   const state = await loadState(root);
   const activeRules = await readFile(
-    resolve(root, ".improvement-loop/active-rules.md"),
+    resolve(root, ".agents/skills/loop-engineering/improvement-loop-state/active-rules.md"),
     "utf8",
   );
   const pending = state.rules.filter((rule) => rule.status === "pending").length;
@@ -78,7 +78,7 @@ function userPromptSubmit() {
     hookSpecificOutput: {
       hookEventName: "UserPromptSubmit",
       additionalContext:
-        "If this prompt corrects code or working behavior you previously produced, use the code-improvement-loop skill and record one anonymized observation before finishing. Never store the raw prompt or secrets. Do not record ordinary feature requests or preference changes as corrections.",
+        "If this prompt corrects code or working behavior you previously produced, use the loop-engineering skill and record one anonymized observation before finishing. Never store the raw prompt or secrets. Do not record ordinary feature requests or preference changes as corrections.",
     },
   };
 }
@@ -136,4 +136,3 @@ main()
     process.stderr.write(`${error.stack ?? error.message}\n`);
     process.exitCode = 1;
   });
-

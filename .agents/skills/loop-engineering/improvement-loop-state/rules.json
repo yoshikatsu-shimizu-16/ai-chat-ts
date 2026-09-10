@@ -314,6 +314,20 @@
         "reason": "ユーザー承認: 実装時は公開関数と主要な内部関数にJSDocを必須とする",
         "approvedAt": "2026-09-10T09:50:58.660Z"
       }
+    },
+    {
+      "fingerprint": "bundle-skill-runtime-assets",
+      "scope": "skill-organization",
+      "rule": "スキルに属する実装・状態・参考資料はスキル配下にまとめ、ホスト統合部だけを外部に残し、すべての参照パスを更新する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "b266ce10-66cb-46aa-8ee1-fb03c240de66"
+      ],
+      "createdAt": "2026-09-10T12:23:16.292Z",
+      "updatedAt": "2026-09-10T12:23:16.292Z",
+      "disabledReason": null,
+      "blockReason": null
     }
   ]
 }

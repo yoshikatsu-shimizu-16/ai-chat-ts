@@ -47,4 +47,4 @@ pnpm loop:record -- --source user-correction --session-id SESSION --turn-id TURN
 pnpm loop:promote
 ```
 
-状態は `.improvement-loop/`、手順は `.agents/skills/code-improvement-loop/`、自動化設定は `.codex/hooks.json` にあります。新しいCodexセッションで `/hooks` を開き、プロジェクトフックを確認して信頼してください。
+実装・状態・手順・参考資料は `.agents/skills/loop-engineering/`、自動化設定は `.codex/hooks.json` にあります。新しいCodexセッションで `/hooks` を開き、プロジェクトフックを確認して信頼してください。

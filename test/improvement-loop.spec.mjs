@@ -11,7 +11,7 @@ import {
   recordObservation,
   sanitizeText,
   verifyTurn,
-} from "../scripts/improvement-loop/core.mjs";
+} from "../.agents/skills/loop-engineering/improvement-loop/core.mjs";
 
 const workspaces = [];
 
@@ -120,7 +120,7 @@ describe("improvement rule lifecycle", () => {
     const result = await promoteEligibleRules(root);
     const state = await loadState(root);
     const activeRules = await readFile(
-      join(root, ".improvement-loop", "active-rules.md"),
+      join(root, ".agents", "skills", "loop-engineering", "improvement-loop-state", "active-rules.md"),
       "utf8",
     );
 

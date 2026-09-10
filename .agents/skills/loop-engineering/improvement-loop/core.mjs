@@ -3,7 +3,7 @@ import { mkdir, open, readFile, rename, unlink, writeFile } from "node:fs/promis
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 
-const LOOP_DIR = ".improvement-loop";
+const LOOP_DIR = ".agents/skills/loop-engineering/improvement-loop-state";
 const DEFAULT_CONFIG = {
   version: 1,
   promotionThreshold: 2,
@@ -121,9 +121,9 @@ async function persist(paths, observations, rules) {
 
 function tryCommit(root, message) {
   const trackedPaths = [
-    ".improvement-loop/observations.jsonl",
-    ".improvement-loop/rules.json",
-    ".improvement-loop/active-rules.md",
+    ".agents/skills/loop-engineering/improvement-loop-state/observations.jsonl",
+    ".agents/skills/loop-engineering/improvement-loop-state/rules.json",
+    ".agents/skills/loop-engineering/improvement-loop-state/active-rules.md",
   ];
   const result = spawnSync(
     "git",
