@@ -325,6 +325,29 @@ export async function promoteEligibleRules(root) {
   return { promoted: result.promoted, commit };
 }
 
+// 🟡 Intent: Explicit user approval can establish a foundational rule immediately without weakening automatic promotion safeguards.
+export async function approveRule(root, input) {
+  const fingerprint = validateFingerprint(input.fingerprint);
+  const reason = requireText(input.reason, "reason", 500);
+  const result = await withLock(root, async (paths) => {
+    const config = { ...DEFAULT_CONFIG, ...(await readJson(paths.config, {})) };
+    const observations = await readJsonLines(paths.observations);
+    const rulesDocument = await readJson(paths.rules, { version: 1, rules: [] });
+    const rules = summarizeRules(rulesDocument.rules, observations);
+    const rule = rules.find((candidate) => candidate.fingerprint === fingerprint);
+    if (!rule) throw new Error(`rule not found: ${fingerprint}`);
+    const now = new Date().toISOString();
+    rule.status = "active";
+    rule.blockReason = null;
+    rule.approval = { source: "user", reason, approvedAt: now };
+    rule.updatedAt = now;
+    await persist(paths, observations, rules);
+    return { fingerprint, config };
+  });
+  const commit = result.config.autoCommit ? tryCommit(root, `chore(loop): approve ${result.fingerprint}`) : null;
+  return { approved: [result.fingerprint], commit };
+}
+
 // 🔵 Intent: Session context contains only compact active policy, never raw feedback or transcripts.
 export function renderActiveRules(rules) {
   const active = rules.filter((rule) => rule.status === "active");

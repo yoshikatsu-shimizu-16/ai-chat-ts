@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import {
   initializeStore,
   loadState,
+  approveRule,
   promoteEligibleRules,
   recordObservation,
   verifyTurn,
@@ -39,6 +40,7 @@ function usage() {
     --summary TEXT --desired-behavior TEXT --fingerprint kebab-case [--evidence-ref REF] [--contradicts RULE]
   pnpm loop:verify --session-id ID --turn-id ID --status passed|failed [--command COMMAND]
   pnpm loop:promote
+  pnpm loop:approve -- --fingerprint RULE --reason "USER_APPROVAL"
   pnpm loop:status`;
 }
 
@@ -80,6 +82,13 @@ async function main() {
     console.log(JSON.stringify(await promoteEligibleRules(root), null, 2));
     return;
   }
+  if (command === "approve") {
+    console.log(JSON.stringify(await approveRule(root, {
+      fingerprint: args.fingerprint,
+      reason: args.reason,
+    }), null, 2));
+    return;
+  }
   if (command === "status") {
     const state = await loadState(root);
     console.log(JSON.stringify({ config: state.config, rules: state.rules }, null, 2));
@@ -92,4 +101,3 @@ main().catch((error) => {
   console.error(error.message);
   process.exitCode = 1;
 });
-

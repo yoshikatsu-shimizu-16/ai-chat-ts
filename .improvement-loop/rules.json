@@ -36,6 +36,58 @@
       "updatedAt": "2026-09-10T00:00:00.000Z",
       "disabledReason": null,
       "blockReason": null
+    },
+    {
+      "fingerprint": "separate-data-by-purpose",
+      "scope": "client-state-and-api-boundaries",
+      "rule": "表示用履歴、API送信用データ、生成中データを用途ごとに分離し、位置依存のマジックナンバーや暗黙のプレースホルダー契約を使わない。",
+      "status": "active",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "a6e18e46-c335-44dc-83f5-ed843aa29b9c"
+      ],
+      "createdAt": "2026-09-10T03:27:17.935Z",
+      "updatedAt": "2026-09-10T03:27:18.135Z",
+      "disabledReason": null,
+      "blockReason": null,
+      "approval": {
+        "source": "user",
+        "reason": "ユーザー承認: データ用途の分離は基本原則として常時適用する",
+        "approvedAt": "2026-09-10T03:27:18.135Z"
+      }
+    },
+    {
+      "fingerprint": "use-domain-specific-identifiers",
+      "scope": "client-code-naming",
+      "rule": "変数名・関数名にChatなどの対象ドメインと役割を含め、処理内容を名前から判断できるようにする。",
+      "status": "active",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "d6ea901e-03ae-40db-9ba3-bf4828a4b206"
+      ],
+      "createdAt": "2026-09-10T03:27:17.997Z",
+      "updatedAt": "2026-09-10T03:27:18.209Z",
+      "disabledReason": null,
+      "blockReason": null,
+      "approval": {
+        "source": "user",
+        "reason": "ユーザー承認: ドメインが分かる命名は基本原則として常時適用する",
+        "approvedAt": "2026-09-10T03:27:18.209Z"
+      }
+    },
+    {
+      "fingerprint": "preserve-user-learning-comments",
+      "scope": "source-comments",
+      "rule": "ユーザーが理解のために残した学習用コメントは、依頼なく削除しない。自明なコメントの整理ルールより明示的なユーザー意図を優先する。",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "7de6c90d-1884-4478-b125-573e67f174dd"
+      ],
+      "createdAt": "2026-09-10T03:31:19.803Z",
+      "updatedAt": "2026-09-10T03:31:19.803Z",
+      "disabledReason": null,
+      "blockReason": null
     }
   ]
 }

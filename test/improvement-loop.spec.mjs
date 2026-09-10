@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 import {
+  approveRule,
   initializeStore,
   loadState,
   promoteEligibleRules,
@@ -39,6 +40,33 @@ describe("sanitizeText", () => {
 });
 
 describe("improvement rule lifecycle", () => {
+  it("activates a user-approved foundational rule immediately", async () => {
+    const root = await createWorkspace();
+    await recordObservation(root, {
+      source: "user-correction",
+      sessionId: "session-a",
+      turnId: "turn-a",
+      scope: "naming",
+      summary: "名前から対象ドメインが判断できない",
+      desiredBehavior: "識別子に対象ドメインと役割を含める",
+      fingerprint: "use-domain-specific-identifiers",
+      evidenceRefs: ["app/chat.tsx"],
+    });
+
+    const result = await approveRule(root, {
+      fingerprint: "use-domain-specific-identifiers",
+      reason: "ユーザー承認: 基本原則として常時適用する",
+    });
+    const state = await loadState(root);
+
+    expect(result.approved).toEqual(["use-domain-specific-identifiers"]);
+    expect(state.rules[0]).toMatchObject({
+      status: "active",
+      occurrenceCount: 1,
+      approval: { source: "user", reason: "ユーザー承認: 基本原則として常時適用する" },
+    });
+  });
+
   it("keeps one verified occurrence pending", async () => {
     const root = await createWorkspace({ promotionThreshold: 2 });
     await recordObservation(root, {
