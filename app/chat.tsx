@@ -56,7 +56,7 @@ export default function Chat() {
       const chatResponse = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message: trimmedChatInputText }),
+        body: JSON.stringify({ messages: chatHistoryWithNextUserMessage }),
         signal: chatResponseAbortController.signal,
       });
       if (!chatResponse.ok || !chatResponse.body) throw new Error("応答を取得できませんでした");
