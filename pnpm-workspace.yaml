@@ -5,4 +5,5 @@ minimumReleaseAgeExclude:
   - wrangler@4.130.0
 allowBuilds:
   esbuild: true
+  unrs-resolver: false
   workerd: true

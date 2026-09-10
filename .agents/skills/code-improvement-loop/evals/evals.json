@@ -1,0 +1,38 @@
+{
+  "skill_name": "code-improvement-loop",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "さっき生成したコンポーネント、処理をそのまま説明するコメントだらけで読みにくいです。コメントは判断理由がある箇所だけに直してください。今後も同じようにして。実ファイルは変更せず、改善ループ上で取るべき操作だけ答えてください。",
+      "expected_output": "修正指示を一般化し、原文を保存せずcomments-explain-why系の観察を記録する操作を示す。",
+      "files": [],
+      "expectations": [
+        "The response classifies the prompt as a reusable correction",
+        "The response provides an anonymized loop:record operation",
+        "The response does not claim immediate promotion from one occurrence"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "別ターンでも同じ『テストに本番スキーマをコピペしないで』という修正をしました。両方の修正後にtypecheckとtestは成功しています。改善ループでは何が起きるべきですか。実ファイルは変更しないでください。",
+      "expected_output": "2件の独立した検証済み証拠として昇格条件を満たすことを説明する。",
+      "files": [],
+      "expectations": [
+        "The response requires two distinct turns or sessions",
+        "The response requires successful verification",
+        "The response limits automatic changes to improvement-loop policy files"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "チャット画面にメッセージのコピー機能を追加してください。今は実装せず、改善ループに記録すべき内容だけ教えてください。",
+      "expected_output": "通常の新機能要求なので学習観察として記録しないと判断する。",
+      "files": [],
+      "expectations": [
+        "The response does not record an improvement observation",
+        "The response identifies this as an ordinary feature request"
+      ]
+    }
+  ]
+}
+

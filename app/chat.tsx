@@ -20,6 +20,8 @@ export default function Chat() {
   // コンポーネントがマウントされたときに、セッションストレージから保存されたメッセージを取得して状態に設定
   useEffect(() => {
     const saved = sessionStorage.getItem(STORAGE_KEY);
+    // Session storage is restored after hydration; a lazy initializer would render different server and client HTML.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (saved) setChatMessages(JSON.parse(saved) as ChatMessage[]);
   }, // 
   [] // 空の依存配列を指定することで、コンポーネントの初回レンダリング時のみ実行

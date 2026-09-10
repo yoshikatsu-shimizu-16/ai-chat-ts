@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "fingerprint": "tests-use-production-contract",
+      "scope": "tests",
+      "rule": "テストは本番コードが公開する契約を利用し、検証スキーマやロジックをテスト内に複製しない。",
+      "status": "pending",
+      "occurrenceCount": 0,
+      "evidenceIds": [],
+      "createdAt": "2026-09-10T00:00:00.000Z",
+      "updatedAt": "2026-09-10T00:00:00.000Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "comments-explain-why",
+      "scope": "comments",
+      "rule": "コメントは自明な処理を言い換えず、重要な設計理由や制約だけを説明する。",
+      "status": "pending",
+      "occurrenceCount": 0,
+      "evidenceIds": [],
+      "createdAt": "2026-09-10T00:00:00.000Z",
+      "updatedAt": "2026-09-10T00:00:00.000Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "inspect-before-editing",
+      "scope": "implementation",
+      "rule": "変更前に関連する本番コード、設定、テストを確認し、存在しない構造を推測しない。",
+      "status": "pending",
+      "occurrenceCount": 0,
+      "evidenceIds": [],
+      "createdAt": "2026-09-10T00:00:00.000Z",
+      "updatedAt": "2026-09-10T00:00:00.000Z",
+      "disabledReason": null,
+      "blockReason": null
+    }
+  ]
+}

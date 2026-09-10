@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "promotionThreshold": 2,
+  "autoCommit": true,
+  "qualityGates": [
+    "./node_modules/.bin/tsc --noEmit",
+    "./node_modules/.bin/vitest run",
+    "./node_modules/.bin/eslint ."
+  ]
+}

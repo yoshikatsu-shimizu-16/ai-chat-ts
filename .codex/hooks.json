@@ -1,0 +1,53 @@
+{
+  "description": "Load, verify, and promote workspace improvement rules.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/improvement-loop.mjs\" session-start",
+            "additionalContextLimit": 3000,
+            "statusMessage": "Loading verified workspace learnings"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/improvement-loop.mjs\" user-prompt-submit",
+            "additionalContextLimit": 500
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/improvement-loop.mjs\" stop",
+            "timeout": 180,
+            "statusMessage": "Verifying changes and updating learnings"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/improvement-loop.mjs\" session-end",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}
+
