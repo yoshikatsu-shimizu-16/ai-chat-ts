@@ -1,17 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  // Cloudflare WorkersにデプロイされるWorkerの名前。
-  "name": "ai-chat-ts",
-  // Workersランタイムの互換性を決める設定。
+  "name": "next-ai-chat",
   "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat"],
-  // Cloudflare D1との接続設定。bindingのDBはコード内のenv.DBに対応する。
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "ai-chat-ts",
-      "database_id": "9c204c7e-050e-477f-81d9-d2cfae3b5081",
-      "migrations_dir": "migrations"
-    }
-  ]
+  "vars": {
+    "OPENAI_API_MODEL": "gpt-4.1-nano",
+    "OPENAI_API_TEMPERATURE": "0.5"
+  }
 }
