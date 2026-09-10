@@ -1,0 +1,43 @@
+{
+  "name": "next-ai-chat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "vinext lint",
+    "test": "vitest run",
+    "cf:dev": "vinext dev",
+    "cf:build": "vinext build",
+    "cf:deploy": "vinext-cloudflare deploy"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.2.9",
+    "@langchain/langgraph": "^1.4.14",
+    "@langchain/openai": "^1.5.11",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-server-dom-webpack": "^19.2.8",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.54.6",
+    "@vinext/cloudflare": "^1.0.0-beta.7",
+    "@cloudflare/workers-types": "^5.20260908.1",
+    "@vitejs/plugin-rsc": "^0.5.34",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0",
+    "vinext": "^1.0.0-beta.9",
+    "vite": "^8.0.0",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.0",
+    "wrangler": "^4.130.0"
+  }
+}

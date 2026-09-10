@@ -1,0 +1,12 @@
+node_modules
+.next
+.vinext
+.wrangler
+dist
+*.tsbuildinfo
+.env
+.env.local
+wrangler.toml
+.improvement-loop/tmp
+.improvement-loop/*.lock
+.agents/skills/code-improvement-loop-workspace

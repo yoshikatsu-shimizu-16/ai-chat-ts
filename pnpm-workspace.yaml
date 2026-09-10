@@ -1,0 +1,8 @@
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@cloudflare/vite-plugin@1.54.6'
+  - miniflare@5.20260908.0-alpha
+  - wrangler@4.130.0
+allowBuilds:
+  esbuild: true
+  workerd: true
