@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { createChatGraph, toLangChainMessages } from "@/lib/chat-graph";
+import { createChatStream } from "@/lib/chat-graph";
 
 const requestSchema = z.object({
   messages: z
@@ -14,22 +14,24 @@ const requestSchema = z.object({
     .max(20),
 });
 
-export async function POST(request: NextRequest) {
+/**
+ * チャット入力を検証し、AI応答をHTTPストリームとして返す。
+ *
+ * @param request チャット履歴を含むHTTPリクエスト
+ * @returns ストリーミング形式の成功レスポンス、またはエラーレスポンス
+ */
+export async function POST(request: NextRequest): Promise<Response> {
   try {
     const body = requestSchema.parse(await request.json());
-    const graph = createChatGraph();
-    const stream = await graph.stream(
-      { messages: toLangChainMessages(body.messages) },
-      { streamMode: "messages" },
-    );
+    const stream = createChatStream(body.messages);
+
     const encoder = new TextEncoder();
-    const output = new ReadableStream({
-      async start(controller) {
+    const output = new ReadableStream<Uint8Array>({
+      async start(controller): Promise<void> {
         try {
-          for await (const [chunk] of stream) {
-            const content =
-              typeof chunk.content === "string" ? chunk.content : "";
-            if (content) controller.enqueue(encoder.encode(content));
+          // サービスの文字列ストリームをHTTPのバイト列へ変換する。
+          for await (const content of stream) {
+            controller.enqueue(encoder.encode(content));
           }
           controller.close();
         } catch (error) {

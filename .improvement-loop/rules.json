@@ -210,6 +210,110 @@
       "updatedAt": "2026-09-10T07:26:25.236Z",
       "disabledReason": null,
       "blockReason": "All occurrences must pass verification"
+    },
+    {
+      "fingerprint": "explicit-function-return-types",
+      "scope": "typescript-function-signatures",
+      "rule": "実装する関数には、推論に任せず戻り値型を明示して契約をコード上に記載する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "7b4b8c00-43c8-4f09-8eeb-8c239402cac2"
+      ],
+      "createdAt": "2026-09-10T08:26:10.573Z",
+      "updatedAt": "2026-09-10T08:26:10.573Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "separate-chat-stream-service-boundary",
+      "scope": "chat-stream-service-boundary",
+      "rule": "ドメイン固有のストリーム変換はサービス層に集約し、Controllerは入力検証とHTTP転送変換だけを担当する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "c8af8697-2f96-4824-8392-24910f710ce0"
+      ],
+      "createdAt": "2026-09-10T09:34:25.242Z",
+      "updatedAt": "2026-09-10T09:34:25.242Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "keep-message-mapper-private",
+      "scope": "module-api-boundaries",
+      "rule": "モジュール内部の実装詳細はexportせず、Controllerが必要とする最小の公開関数だけを公開する",
+      "status": "pending",
+      "occurrenceCount": 2,
+      "evidenceIds": [
+        "dfb64e45-ceb4-4b56-9e6f-4fa770517654",
+        "4ba70667-65ed-437d-86b2-703e1b874ab3"
+      ],
+      "createdAt": "2026-09-10T09:36:13.567Z",
+      "updatedAt": "2026-09-10T09:37:05.434Z",
+      "disabledReason": null,
+      "blockReason": "All occurrences must pass verification"
+    },
+    {
+      "fingerprint": "reuse-compiled-chat-graph",
+      "scope": "chat-graph-lifecycle",
+      "rule": "状態を持たないコンパイル済みチャットグラフはモジュール内で再利用し、実行ストリームだけをリクエストごとに生成する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "1064bfe0-d4bc-460f-9551-4a7a1ebb0d81"
+      ],
+      "createdAt": "2026-09-10T09:41:44.135Z",
+      "updatedAt": "2026-09-10T09:41:44.135Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "order-definitions-by-dependency",
+      "scope": "module-structure",
+      "rule": "関連する関数と共有値は依存関係が読みやすい順に配置し、初期化対象を利用箇所より前に定義する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "9547b8e3-fd84-44ad-8cdf-3efb8f32306c"
+      ],
+      "createdAt": "2026-09-10T09:43:24.221Z",
+      "updatedAt": "2026-09-10T09:43:24.221Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "public-api-before-private-methods",
+      "scope": "module-structure",
+      "rule": "ソースは共有変数、公開メソッド、privateメソッドの順に配置し、外部利用者が公開APIを先に読めるようにする",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "88179f35-c8e0-41d1-a61d-66650cbb1787"
+      ],
+      "createdAt": "2026-09-10T09:46:41.892Z",
+      "updatedAt": "2026-09-10T09:46:41.892Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "document-functions-with-jsdoc",
+      "scope": "source-documentation",
+      "rule": "公開関数と主要な内部関数には目的、引数、戻り値を示すJSDocを付ける",
+      "status": "active",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "9b32f1e8-cc29-4067-865f-14c8af254c9f"
+      ],
+      "createdAt": "2026-09-10T09:50:13.396Z",
+      "updatedAt": "2026-09-10T09:50:58.660Z",
+      "disabledReason": null,
+      "blockReason": null,
+      "approval": {
+        "source": "user",
+        "reason": "ユーザー承認: 実装時は公開関数と主要な内部関数にJSDocを必須とする",
+        "approvedAt": "2026-09-10T09:50:58.660Z"
+      }
     }
   ]
 }
