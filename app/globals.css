@@ -2,7 +2,7 @@
 * { box-sizing:border-box; }
 body { margin:0; color:var(--ink); background:#f7f7f7; font-family: system-ui, -apple-system, sans-serif; }
 main { max-width:760px; margin:0 auto; padding:48px 20px; }
-header { border-left:6px solid var(--blue); padding:4px 0 4px 18px; margin-bottom:28px; }
+header { margin-bottom:28px; }
 .eyebrow { color:var(--blue); font-weight:700; margin:0 0 4px; } h1 { margin:0 0 8px; font-size:2rem; } header p:last-child { color:var(--muted); margin:0; }
 .chat { background:white; border:1px solid #d8d8d8; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px #0000000d; }
 .messages { min-height:360px; max-height:60vh; overflow:auto; padding:20px; }
