@@ -5,20 +5,27 @@ import {
   SystemMessage,
 } from "@langchain/core/messages";
 import { ChatOpenAI } from "@langchain/openai";
-import { Annotation, END, START, StateGraph } from "@langchain/langgraph";
+import {
+  Annotation,
+  BaseCheckpointSaver,
+  END,
+  START,
+  StateGraph,
+  messagesStateReducer,
+} from "@langchain/langgraph";
 
 // APIから受け取る、ユーザーまたはAIの1件分のチャットメッセージ。
 export type ChatInputMessage = { role: "user" | "assistant"; content: string };
 // LangGraphが実行中に保持するチャット履歴の状態。
 const State = Annotation.Root({
   messages: Annotation<BaseMessage[]>({
-    reducer: (_old, next) => next,
+    reducer: messagesStateReducer,
     default: () => [],
   }),
 });
 
 // AIモデルを呼び出してチャット応答を生成するグラフを構築する。
-export function createChatGraph() {
+export function createChatGraph(checkpointer: BaseCheckpointSaver) {
   // モデル、温度、ストリーミング設定を環境変数から決める。
   const model = new ChatOpenAI({
     model: process.env.OPENAI_API_MODEL ?? "gpt-4.1-nano",
@@ -34,15 +41,15 @@ export function createChatGraph() {
         new SystemMessage("あなたは親切で簡潔な日本語アシスタントです。"),
         ...state.messages,
       ]);
-      // 現在は履歴全体と新しい回答をまとめて返している。
-      // streamMode: "messages" ではこの出力がストリームへ流れるため、
-      // 過去のメッセージまで今回のAI回答としてクライアントへ送られる。
-      return { messages: [...state.messages, response] };
+      // グラフ状態には今回生成したAI回答だけを差分として返す。
+      // 履歴全体を返すと streamMode: "messages" が過去のメッセージまで
+      // 再送し、クライアントが今回の回答と誤認して表示してしまう。
+      return { messages: [response] };
     })
     .addEdge(START, "chat_model")
     .addEdge("chat_model", END);
   
-  return graph.compile();
+  return graph.compile({ checkpointer });
 }
 
 export function toLangChainMessages(messages: ChatInputMessage[]) {

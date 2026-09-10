@@ -26,6 +26,14 @@ pnpm cf:deploy
 wrangler secret put OPENAI_API_KEY
 ```
 
+モデルなどの実行設定は、Cloudflare Dashboardの対象Worker（`ai-chat-ts`）を開き、
+「Settings」→「Variables and Secrets」から通常のVariablesとして登録します。
+
+```text
+OPENAI_API_MODEL=gpt-4.1-nano
+OPENAI_API_TEMPERATURE=0.5
+```
+
 ## 学習ポイント
 
 - `lib/chat-graph.ts`: `START → chat_model → END` のLangGraph
@@ -33,6 +41,16 @@ wrangler secret put OPENAI_API_KEY
 - `app/chat.tsx`: `sessionStorage` と `AbortController` を使うチャットUI
 
 本番公開時は、認証、レート制限、入力モデレーション、ログ方針を追加してください。
+
+### 会話履歴の永続化（D1）
+
+Cloudflare Workersはリクエスト間でメモリを共有しないため、LangGraphのチェックポイントをD1へ保存します。初回だけデータベースを作成し、`wrangler.jsonc` の `database_id` を発行されたIDに置き換えてください。
+
+```bash
+wrangler d1 migrations apply ai-chat-ts --remote
+```
+
+APIはブラウザへ `chat_thread_id` Cookieを発行し、その値をLangGraphの `thread_id` として利用します。次回リクエストではクライアントから履歴を送らず、D1チェックポインターが同じスレッドの状態を復元します。ローカルの `sessionStorage` は画面表示用キャッシュであり、AIへ渡す履歴の正本ではありません。
 
 ## 開発AIの改善ループ
 

@@ -4,4 +4,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [vinext(), cloudflare({ viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] } })],
+  build: {
+    rollupOptions: {
+      external: ["cloudflare:workers"],
+    },
+  },
 });
