@@ -107,6 +107,109 @@
         "reason": "ユーザー承認: レビュー説明では具体的なソース箇所と因果経路を必ず示す",
         "approvedAt": "2026-09-10T04:43:28.092Z"
       }
+    },
+    {
+      "fingerprint": "debug-launch-uses-route-compatible-server",
+      "scope": "debug-launch-configuration",
+      "rule": "デバッグ起動構成は、対象アプリのルートを解決できる開発サーバーを起動する設定にする",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "1a3291b9-28a0-47bb-b703-a31828ccff63"
+      ],
+      "createdAt": "2026-09-10T06:18:18.047Z",
+      "updatedAt": "2026-09-10T06:18:18.047Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "debug-preserves-runtime-bindings",
+      "scope": "cloudflare-local-development",
+      "rule": "実行環境に必要なCloudflare bindingを提供する開発コマンドをデバッグ構成から起動する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "63a36d17-2ec7-46ba-8353-d84cc8e38b90"
+      ],
+      "createdAt": "2026-09-10T06:20:28.429Z",
+      "updatedAt": "2026-09-10T06:20:28.429Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "inspect-effective-debug-launch-state",
+      "scope": "debug-launch-configuration",
+      "rule": "When diagnosing a debug port conflict, inspect the actual process command line and inherited environment before attributing the port to launch.json",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "647951e2-e6a8-4dfd-b594-ebbd032ab4d0"
+      ],
+      "createdAt": "2026-09-10T06:26:18.678Z",
+      "updatedAt": "2026-09-10T06:26:18.678Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "let-vscode-own-inspector",
+      "scope": "debug-launch-configuration",
+      "rule": "Let the VS Code Node launch adapter own inspector setup and avoid adding NODE_OPTIONS inspect flags in launch.json",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "4c0899c7-6e2c-451c-bf89-46292c50342f"
+      ],
+      "createdAt": "2026-09-10T06:28:05.000Z",
+      "updatedAt": "2026-09-10T06:28:05.000Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "start-browser-debug-on-server-ready",
+      "scope": "debug-launch-configuration",
+      "rule": "When the debug server reports readiness, automatically start the configured browser debug session",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "fd7128ec-cbbb-4cad-a154-52aa5411c296"
+      ],
+      "createdAt": "2026-09-10T06:29:28.713Z",
+      "updatedAt": "2026-09-10T06:29:28.713Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "use-supported-browser-ready-debug-action",
+      "scope": "debug-launch-configuration",
+      "rule": "Use VS Code's supported debugWithChrome server-ready action and match the actual dev-server readiness line",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "4307b81d-6ded-460e-9ca5-afdc1f6f4b7b"
+      ],
+      "createdAt": "2026-09-10T06:32:10.786Z",
+      "updatedAt": "2026-09-10T06:32:10.786Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "respect-explicit-task-scope",
+      "scope": "task-scope-and-user-authority",
+      "rule": "Execute only actions explicitly requested or necessary to fulfill the request; do not add unrelated side effects based on assumptions",
+      "status": "pending",
+      "occurrenceCount": 6,
+      "evidenceIds": [
+        "94b733aa-b891-44c4-9d65-48503eb5c7de",
+        "1aef4ee9-c87f-42e8-84a2-53d0d1373729",
+        "7f5a39ba-2b70-49f6-8bd3-c87d529fbebc",
+        "c31083cc-205e-46b3-b7c7-86acbcf0568b",
+        "9a65d370-d387-4668-b620-665b3f56a083",
+        "ed412d47-779d-4bc7-9d66-4b3f3453a885"
+      ],
+      "createdAt": "2026-09-10T06:35:17.093Z",
+      "updatedAt": "2026-09-10T07:26:25.236Z",
+      "disabledReason": null,
+      "blockReason": "All occurrences must pass verification"
     }
   ]
 }
