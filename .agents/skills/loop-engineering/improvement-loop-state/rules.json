@@ -328,6 +328,20 @@
       "updatedAt": "2026-09-10T12:23:16.292Z",
       "disabledReason": null,
       "blockReason": null
+    },
+    {
+      "fingerprint": "separate-controller-composition-root",
+      "scope": "clean-architecture-and-nextjs",
+      "rule": "Controllerは入力変換とUseCase呼び出しに限定し、具体的な実装選択と依存関係の組み立ては外側のComposition Rootへ分離する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "fe0e09d5-bd75-4415-85e5-e48a12951079"
+      ],
+      "createdAt": "2026-09-10T12:50:25.184Z",
+      "updatedAt": "2026-09-10T12:50:25.184Z",
+      "disabledReason": null,
+      "blockReason": null
     }
   ]
 }
