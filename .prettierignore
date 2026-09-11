@@ -1,0 +1,11 @@
+.next
+.vinext
+.wrangler
+dist
+node_modules
+*.tsbuildinfo
+.agents
+.codex
+.impeccable
+pnpm-lock.yaml
+docs/dev/context.md

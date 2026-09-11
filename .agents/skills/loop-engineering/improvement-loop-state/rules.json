@@ -61,12 +61,13 @@
       "scope": "client-code-naming",
       "rule": "変数名・関数名にChatなどの対象ドメインと役割を含め、処理内容を名前から判断できるようにする。",
       "status": "active",
-      "occurrenceCount": 1,
+      "occurrenceCount": 2,
       "evidenceIds": [
-        "d6ea901e-03ae-40db-9ba3-bf4828a4b206"
+        "d6ea901e-03ae-40db-9ba3-bf4828a4b206",
+        "e15fdb5e-21f6-43c8-99f5-49fedbd885e4"
       ],
       "createdAt": "2026-09-10T03:27:17.997Z",
-      "updatedAt": "2026-09-10T03:27:18.209Z",
+      "updatedAt": "2026-09-11T05:57:44.393Z",
       "disabledReason": null,
       "blockReason": null,
       "approval": {
@@ -301,12 +302,14 @@
       "scope": "source-documentation",
       "rule": "公開関数と主要な内部関数には目的、引数、戻り値を示すJSDocを付ける",
       "status": "active",
-      "occurrenceCount": 1,
+      "occurrenceCount": 3,
       "evidenceIds": [
-        "9b32f1e8-cc29-4067-865f-14c8af254c9f"
+        "9b32f1e8-cc29-4067-865f-14c8af254c9f",
+        "544378ed-e010-4d9f-aa40-a7d8ce151976",
+        "fb09c611-8330-4478-8f1d-a599b4194edf"
       ],
       "createdAt": "2026-09-10T09:50:13.396Z",
-      "updatedAt": "2026-09-10T09:50:58.660Z",
+      "updatedAt": "2026-09-11T05:37:18.685Z",
       "disabledReason": null,
       "blockReason": null,
       "approval": {
@@ -340,6 +343,119 @@
       ],
       "createdAt": "2026-09-10T12:50:25.184Z",
       "updatedAt": "2026-09-10T12:50:25.184Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "formatter-runs-before-quality-gates",
+      "scope": "formatting-and-hooks",
+      "rule": "実装変更を完了するhookは対象ファイルを限定したformatterを最初に実行し、その後に型・テスト・Lintを検証する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "ebc4f3cf-d3cf-4c78-ae87-367bf428a6fc"
+      ],
+      "createdAt": "2026-09-11T03:46:42.061Z",
+      "updatedAt": "2026-09-11T03:46:42.061Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "separate-contract-and-session-responsibilities",
+      "scope": "module-boundaries",
+      "rule": "一つのモジュールは関係の近い一つの責務に限定し、ファイル名から扱うドメインと役割を判断できるようにする",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "34dcfaf1-b3b5-4e41-8999-201f9992a0a7"
+      ],
+      "createdAt": "2026-09-11T05:06:37.606Z",
+      "updatedAt": "2026-09-11T05:06:37.606Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "avoid-generic-domain-module-names",
+      "scope": "module-naming",
+      "rule": "モジュール名は一般概念だけでなく対象ドメインと処理境界を示し、実在しないドメイン概念を推測させない",
+      "status": "pending",
+      "occurrenceCount": 2,
+      "evidenceIds": [
+        "19346080-3092-4722-9f32-3ad0398c08bc",
+        "ccebb777-f2d0-47f3-b6f3-da602c140c7a"
+      ],
+      "createdAt": "2026-09-11T05:16:28.988Z",
+      "updatedAt": "2026-09-11T05:40:20.721Z",
+      "disabledReason": null,
+      "blockReason": "All occurrences must pass verification"
+    },
+    {
+      "fingerprint": "explain-framework-state-primitives",
+      "scope": "langgraph-state-model",
+      "rule": "フレームワークの状態定義は使用する抽象概念と更新規則を明示し、複合的な状態変換は名前付き関数または段階的な処理で表現する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "5cb9f29b-c2dd-481e-aedb-f8371bb3a7ee"
+      ],
+      "createdAt": "2026-09-11T05:43:57.272Z",
+      "updatedAt": "2026-09-11T05:43:57.272Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "concise-intent-comments",
+      "scope": "source-comments",
+      "rule": "コードコメントは実装意図を短く示し、詳細な概念説明は必要な場合だけ別途行う",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "a8cd132f-4bf7-4ee2-b457-74d686e76281"
+      ],
+      "createdAt": "2026-09-11T05:45:42.567Z",
+      "updatedAt": "2026-09-11T05:45:42.567Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "concrete-intent-comments",
+      "scope": "source-comments",
+      "rule": "コードコメントは抽象概念ではなく、その箇所で実際に起きる処理を具体的かつ短く表現する",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "00f15e40-8123-4b8b-a7b1-0e3c3155155d"
+      ],
+      "createdAt": "2026-09-11T05:51:03.264Z",
+      "updatedAt": "2026-09-11T05:51:03.264Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "use-domain-specific-reducer-parameters",
+      "scope": "langgraph-state-model",
+      "rule": "状態更新の引数名は対象データと役割を表し、oldやnextのような文脈依存の一般名を避ける",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "995047cb-e1fc-4236-a3c4-e97bf5fc61ff"
+      ],
+      "createdAt": "2026-09-11T05:56:20.370Z",
+      "updatedAt": "2026-09-11T05:56:20.370Z",
+      "disabledReason": null,
+      "blockReason": null
+    },
+    {
+      "fingerprint": "precise-state-update-names",
+      "scope": "langgraph-state-model",
+      "rule": "変数名は実際の役割とデータ構造を示し、通常の値と将来許容する配列契約を混同させない",
+      "status": "pending",
+      "occurrenceCount": 1,
+      "evidenceIds": [
+        "27b2f9a3-97fe-4ffb-9eb7-80efaa945c33"
+      ],
+      "createdAt": "2026-09-11T06:02:35.729Z",
+      "updatedAt": "2026-09-11T06:02:35.729Z",
       "disabledReason": null,
       "blockReason": null
     }

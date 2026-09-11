@@ -1,10 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { z } from "zod";
-
-const schema = z.object({ messages: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.string().trim().min(1).max(4000) })).min(1).max(20) });
+import { chatRequestSchema } from "@/lib/chat-request-schema";
 
 describe("chat request contract", () => {
-  it("accepts a user message", () => expect(schema.parse({ messages: [{ role: "user", content: "こんにちは" }] }).messages).toHaveLength(1));
-  it("rejects empty content", () => expect(() => schema.parse({ messages: [{ role: "user", content: " " }] })).toThrow());
-  it("rejects more than 20 messages", () => expect(() => schema.parse({ messages: Array.from({ length: 21 }, () => ({ role: "user", content: "x" })) })).toThrow());
+  it("accepts a user message", () =>
+    expect(chatRequestSchema.parse({ message: "こんにちは" }).message).toBe(
+      "こんにちは",
+    ));
+  it("rejects empty content", () =>
+    expect(() => chatRequestSchema.parse({ message: " " })).toThrow());
+  it("rejects a client-provided history", () =>
+    expect(() =>
+      chatRequestSchema.parse({ message: "続き", messages: [] }),
+    ).toThrow());
 });

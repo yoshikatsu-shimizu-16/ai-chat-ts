@@ -70,4 +70,3 @@ test/                 # Vitest contract and tooling tests
 - 🔵 Local secrets belong in `.env.local`; production secrets use Wrangler secrets.
 - 🔵 The improvement loop stores anonymized summaries and identifiers, never raw prompts or transcripts.
 - 🔵 No Docker Compose configuration is present.
-

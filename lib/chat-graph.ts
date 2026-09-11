@@ -1,18 +1,29 @@
 import {
   HumanMessage,
-  AIMessage,
   BaseMessage,
   SystemMessage,
 } from "@langchain/core/messages";
 import { ChatOpenAI } from "@langchain/openai";
-import { Annotation, END, START, StateGraph } from "@langchain/langgraph";
+import {
+  Annotation,
+  END,
+  MemorySaver,
+  START,
+  StateGraph,
+} from "@langchain/langgraph";
+import type { ChatSessionId } from "@/lib/chat-session";
 
-// APIから受け取る、ユーザーまたはAIの1件分のチャットメッセージ。
-export type ChatInputMessage = { role: "user" | "assistant"; content: string };
-// LangGraphが実行中に保持するチャット履歴の状態。
+const MAX_CHAT_MEMORY_MESSAGES = 20;
+const chatMemorySaver = new MemorySaver();
+// Annotation: LangGraphの共有状態。
 const State = Annotation.Root({
   messages: Annotation<BaseMessage[]>({
-    reducer: (_old, next) => next,
+    // 現在の履歴に今回のメッセージを追加し、最新20件を残す。
+    reducer: (currentChatMessages, chatMessagesToAppend) =>
+      [...currentChatMessages, ...chatMessagesToAppend].slice(
+        -MAX_CHAT_MEMORY_MESSAGES,
+      ),
+    // default: 状態がない場合の初期値。
     default: () => [],
   }),
 });
@@ -21,24 +32,25 @@ const State = Annotation.Root({
 const chatGraph = createChatGraph();
 
 /**
- * 会話履歴をAI応答の文字列ストリームへ変換する。
+ * サーバー側のチャットメモリーを使ってAI応答の文字列ストリームを生成する。
  *
- * @param messages 画面から受け取った会話履歴
+ * @param chatSessionId Cookieで識別されたチャットセッションID
+ * @param chatUserMessage 今回のユーザー入力
  * @returns 今回生成されたAI応答だけを返す非同期文字列ストリーム
  */
 export async function* createChatStream(
-  messages: ChatInputMessage[],
+  chatSessionId: ChatSessionId,
+  chatUserMessage: string,
 ): AsyncGenerator<string, void, undefined> {
   // AIモデルを呼び出すチャットグラフを実行し、ストリームで応答を受け取る。
   const graphStream = await chatGraph.stream(
-    // LangGraphの状態に、画面から受け取った会話履歴を渡す。
-    {
-      messages: toLangChainMessages(messages),
-    },
+    // LangGraphには今回の入力だけを渡し、過去の状態はthread_idから復元する。
+    { messages: [new HumanMessage(chatUserMessage)] },
     // LangGraphのストリームモードを「messages」に設定することで、
     // chat_modelノードの出力であるBaseMessage[]を1件ずつ受け取れる。
     {
       streamMode: "messages",
+      configurable: { thread_id: chatSessionId },
     },
   );
 
@@ -50,9 +62,8 @@ export async function* createChatStream(
 }
 
 /**
- * AIモデルを呼び出すチャットグラフを構築してコンパイルする。
- *
- * @returns 再利用可能なコンパイル済みチャットグラフ
+ * チャットモデルを呼び出し、チェックポイント付きのグラフを構築する。
+ * @returns コンパイル済みチャットグラフ
  */
 function createChatGraph() {
   // モデル、温度、ストリーミング設定を環境変数から決める。
@@ -76,19 +87,16 @@ function createChatGraph() {
     .addEdge(START, "chat_model")
     .addEdge("chat_model", END);
 
-  return graph.compile();
+  return graph.compile({ checkpointer: chatMemorySaver });
 }
 
 /**
- * 画面入力をLangChainのメッセージ形式へ変換する。
- *
- * @param messages 画面から受け取った会話履歴
- * @returns LangChainへ渡すメッセージ一覧
+ * 指定されたチャットセッションのサーバー側メモリーを完全に削除する。
+ * @param chatSessionId 削除対象のチャットセッションID
+ * @returns メモリー削除完了を示すPromise
  */
-function toLangChainMessages(messages: ChatInputMessage[]): BaseMessage[] {
-  return messages.map((message) =>
-    message.role === "user"
-      ? new HumanMessage(message.content)
-      : new AIMessage(message.content),
-  );
+export async function clearChatSession(
+  chatSessionId: ChatSessionId,
+): Promise<void> {
+  await chatMemorySaver.deleteThread(chatSessionId);
 }
