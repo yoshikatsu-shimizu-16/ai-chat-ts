@@ -1,10 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "next-ai-chat",
+  "name": "ai-chat-ts",
   "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat"],
+  "main": "vinext/server/fetch-handler",
   "vars": {
     "OPENAI_API_MODEL": "gpt-4.1-nano",
     "OPENAI_API_TEMPERATURE": "0.5"
+  },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
   }
 }
